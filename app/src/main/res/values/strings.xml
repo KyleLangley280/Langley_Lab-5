@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Langley_Lab#5A</string>
+    <string name="new_memo">New Memo</string>
+    <string name="memo_to_delete">Memo # to Delete</string>
+    <string name="add_memo">ADD MEMO</string>
+    <string name="delete_memo">DELETE MEMO</string>
+</resources>
