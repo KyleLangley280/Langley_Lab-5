@@ -4,4 +4,7 @@
     <string name="memo_to_delete">Memo # to Delete</string>
     <string name="add_memo">ADD MEMO</string>
     <string name="delete_memo">DELETE MEMO</string>
+    <string name="hi">hi</string>
+    <string name="ok">ok</string>
+
 </resources>

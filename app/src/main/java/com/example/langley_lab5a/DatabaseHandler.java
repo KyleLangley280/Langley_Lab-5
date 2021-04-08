@@ -7,6 +7,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import androidx.annotation.Nullable;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class DatabaseHandler extends SQLiteOpenHelper{
 
     private static final int DATABASE_VERSION = 1;
@@ -35,7 +38,7 @@ public class DatabaseHandler extends SQLiteOpenHelper{
         onCreate(db);
     }
 
-    public void addContact(Contact c) {
+    public void addMemo(Memo c) {
         ContentValues values = new ContentValues();
         //values.put(COLUMN_NAME, c.getName());
         //values.put(COLUMN_ADDRESS, c.getAddress());
@@ -47,12 +50,12 @@ public class DatabaseHandler extends SQLiteOpenHelper{
         db.close();
     }
 
-    public Contact getContact(int id) {
+    public Memo getMemo(int id) {
         String query = "SELECT * FROM " + TABLE_CONTACTS + " WHERE " + COLUMN_ID + " = " + id;
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(query, null);
-        Contact c = null;
+        Memo c = null;
 
         if (cursor.moveToFirst()) {
             cursor.moveToFirst();
@@ -63,13 +66,13 @@ public class DatabaseHandler extends SQLiteOpenHelper{
             String newMemo = cursor.getString(1);
 
             cursor.close();
-            c = new Contact(newId, newMemo);
+            c = new Memo(newId, newMemo);
         }
         db.close();
         return c;
     }
 
-    public String getAllContacts() {
+    public String getAllMemos() {
         String query = "SELECT * FROM " + TABLE_CONTACTS;
 
         StringBuilder s = new StringBuilder();
@@ -81,7 +84,7 @@ public class DatabaseHandler extends SQLiteOpenHelper{
             cursor.moveToFirst();
             do {
                 int id = cursor.getInt(0);
-                s.append(getContact(id)).append("\n");
+                s.append(getMemo(id)).append("\n");
             }
             while( cursor.moveToNext() );
         }
@@ -100,4 +103,28 @@ public class DatabaseHandler extends SQLiteOpenHelper{
         db.close();
     }
 
+    public List<Memo> getAllMemosAsList() {
+
+        String query = "SELECT * FROM " + TABLE_CONTACTS;
+
+        List<Memo> allMemos = new ArrayList<>();
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(query,null);
+
+        if(cursor.moveToFirst()) {
+            cursor.moveToFirst();
+            do {
+                int newId = cursor.getInt(0);
+                //String newName = cursor.getString(1);
+                //String newAddress = cursor.getString(2);
+                String newMemo = cursor.getString(1);
+
+                allMemos.add(new Memo(newId, newMemo));
+            }
+            while( cursor.moveToNext() );
+        }
+        db.close();
+        return allMemos;
+    }
 }

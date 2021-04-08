@@ -1,18 +1,18 @@
 package com.example.langley_lab5a;
 
-public class Contact {
+public class Memo {
     private int id;
     //private String name,address;
     private String memo;
 
-    public Contact(int id, String memo){
+    public Memo(int id, String memo){
         this.id = id;
         //this.name = name;
         //this.address = address;
         this.memo = memo;
     }
 
-    public Contact(String memo){
+    public Memo(String memo){
         //this.name = name;
         //this.address = address;
         this.memo = memo;
